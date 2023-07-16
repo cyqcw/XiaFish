@@ -1,5 +1,6 @@
 package com.xiafish;
 
+import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SecondHandTradingPlatformApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void jwtTest() {
+		Claims
 	}
 
 }
