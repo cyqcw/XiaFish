@@ -15,16 +15,27 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Component
 public class LoginCheckInterceptor implements HandlerInterceptor {
+    private boolean debug=false;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        //测试用全部放行
+        if(debug) {
+            return true;
+        }
 
         //1.get url
         String url= request.getRequestURI().toString();
         log.info("url:{}",url);
 
-        //2.判断url是否包含login
+        //2.判断url是否包含login或者signup
         if(url.contains("login")){
             log.info("登录操作，放行...");
+            return true;
+        }
+
+        if(url.contains("signup")){
+            log.info("注册操作，放行...");
             return true;
         }
 
