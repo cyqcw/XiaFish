@@ -9,5 +9,5 @@ public class SecondHandTradingPlatformApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SecondHandTradingPlatformApplication.class, args);
 	}
-	String update_data;
+
 }
