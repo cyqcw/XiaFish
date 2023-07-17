@@ -1,2 +1,9 @@
-package com.xiafish.controller;public class AdminController {
+package com.xiafish.controller;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@Slf4j
+public class AdminController {
 }

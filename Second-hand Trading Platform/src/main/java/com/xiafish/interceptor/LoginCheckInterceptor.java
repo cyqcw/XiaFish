@@ -1,4 +1,4 @@
-package interceptor;
+package com.xiafish.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xiafish.pojo.Result;
