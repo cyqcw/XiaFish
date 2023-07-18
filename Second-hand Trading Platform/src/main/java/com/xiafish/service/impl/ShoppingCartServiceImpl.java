@@ -1,17 +1,14 @@
 package com.xiafish.service.impl;
 
-import com.xiafish.exception.DuplicateItemException;
-import com.xiafish.exception.GlobalExceptionHandler;
 import com.xiafish.mapper.ShoppingCartMapper;
-import com.xiafish.pojo.Result;
 import com.xiafish.pojo.ShoppingCart;
 import com.xiafish.service.ShoppingCartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -25,7 +22,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart getCart(Integer userId, Integer page, Integer pageSize) {
-        return shoppingCartMapper.getCartByUserId(userId,page,pageSize);
+    public List<ShoppingCart> getCartList(Integer userId, Integer page, Integer pageSize) {
+        return shoppingCartMapper.getCartListByUserId(userId,page,pageSize);
     }
 }

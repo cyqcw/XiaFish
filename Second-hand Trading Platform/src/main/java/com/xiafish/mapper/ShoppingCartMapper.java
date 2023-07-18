@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper
 public interface ShoppingCartMapper {
@@ -16,5 +17,5 @@ public interface ShoppingCartMapper {
     @Select("select shopping_cart_id,shopping_cart.goods_id,goods_name,collect_num,cur_price,inventory,goods_img_url" +
             " from xiafish.shopping_cart,xiafish.goods,xiafish.goods_img " +
             "where goods.goods_id=goods_img.goods_id and shopping_cart.goods_id=goods.goods_id and user_id=#{userId};")
-    ShoppingCart getCartByUserId(Integer userId, Integer page, Integer pageSize);
+    List<ShoppingCart> getCartListByUserId(Integer userId, Integer page, Integer pageSize);
 }

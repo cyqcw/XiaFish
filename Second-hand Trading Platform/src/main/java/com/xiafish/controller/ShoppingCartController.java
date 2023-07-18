@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 public class ShoppingCartController {
@@ -35,7 +37,7 @@ public class ShoppingCartController {
                           @RequestParam(value = "page",defaultValue = "1") Integer page,
                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
         log.info("分页查询用户{}的购物车信息，当前为第{}页，每页有{}条数据",userId,page,pageSize);
-        ShoppingCart shoppingCart=shoppingCartService.getCart(userId,page,pageSize);
-        return Result.success(shoppingCart);
+        List<ShoppingCart> list=shoppingCartService.getCartList(userId,page,pageSize);
+        return Result.success(list);
     }
 }

@@ -18,7 +18,7 @@ public class Order {
     private Integer sellerId;
     private Integer goodsId;
     private Integer orderNum;
-    private float orderSumPrice;
+    private Float orderSumPrice;
     private String orderStatus;
     private LocalDate orderDateTime;
 }

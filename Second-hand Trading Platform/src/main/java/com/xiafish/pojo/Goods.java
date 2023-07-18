@@ -6,18 +6,22 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Goods {
-    private  Integer goodsId;
+    private Integer goodsId;
     private String goodsName;
-    private float oriPrice;
-    private float curPrice;
+    private Float oriPrice;
+    private Float curPrice;
     private Integer goodsCategoryId;
     private Integer sellerId;
     private LocalDateTime releaseTime;
     private Integer inventory;
-    String  goodsProfile;
+    private String  goodsProfile;
+
+    private Integer categoryId;
+    private String categoryName;
 }
