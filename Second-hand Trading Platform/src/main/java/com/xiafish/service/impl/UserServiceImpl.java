@@ -2,7 +2,9 @@ package com.xiafish.service.impl;
 
 import com.xiafish.mapper.UserMapper;
 import com.xiafish.pojo.Goods;
+import com.xiafish.pojo.ShoppingCart;
 import com.xiafish.pojo.User;
+import com.xiafish.pojo.UserComment;
 import com.xiafish.service.UserService;
 import com.xiafish.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +23,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) throws RuntimeException{
-        String email = user.getUserEmail();
-        String phoneNumber = user.getUserPhoneNum();
-
-        // 验证邮箱和电话号码的格式
-        if (email!=null && !ValidationUtils.isValidEmail(email)) {
-            throw new IllegalArgumentException("Invalid email format");
-        }
-
-        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
-            throw new IllegalArgumentException("Invalid phone number format");
-        }
-        try {
+//        String email = user.getUserEmail();
+//        String phoneNumber = user.getUserPhoneNum();
+//
+//        // 验证邮箱和电话号码的格式
+//        if (email!=null && !ValidationUtils.isValidEmail(email)) {
+//            throw new IllegalArgumentException("Invalid email format");
+//        }
+//
+//        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
+//            throw new IllegalArgumentException("Invalid phone number format");
+//        }
             userMapper.updateUser(user);
-        }catch (Exception e)
-        {
-            throw new RuntimeException("update failed");
-        }
     }
 
     @Override
@@ -59,16 +56,32 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
     @Override
     public List<Goods> getGoodsByUserId(Integer userId) {
-        List<Goods>goodsList=userMapper.goodsList(userId);
+        List<Goods> goodsList=userMapper.goodsList(userId);
         return goodsList;
     }
 
     @Override
     public void releaseGoods(Goods goods) {
         userMapper.addGoods(goods);
+    }
+
+    @Override
+    public void deleteGoods(Integer userId,List<Integer> goodsids) {
+        userMapper.deleteGoods(userId,goodsids);
+    }
+
+    @Override
+    public List<UserComment> findComment(Integer userid) {
+        List<UserComment>userCommentList=userMapper.selectcomment(userid);
+        return userCommentList;
+    }
+
+    @Override
+    public List<ShoppingCart> viewShoppingCart(Integer userid) {
+        List<ShoppingCart> shoppingCartsList=userMapper.selectShoppingCart(userid);
+        return shoppingCartsList;
     }
 
 }

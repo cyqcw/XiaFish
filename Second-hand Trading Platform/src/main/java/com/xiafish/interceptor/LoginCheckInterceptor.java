@@ -43,6 +43,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             log.info("token为空，返回未登录");
             Result error=Result.error("NOT_LOGIN");
             String notLogin= JSONObject.toJSONString(error);
+            //设置响应头（告知浏览器：响应的数据类型为json、响应的数据编码表为utf-8）
+            response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(notLogin);
             return false;
         }
@@ -56,6 +58,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             log.info("令牌解析失败");
             Result error=Result.error("NOT_LOGIN");
             String notLogin=JSONObject.toJSONString(error);
+            //设置响应头（告知浏览器：响应的数据类型为json、响应的数据编码表为utf-8）
+            response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(notLogin);
             return false;
         }
