@@ -1,7 +1,10 @@
 package com.xiafish.mapper;
 
 import com.xiafish.pojo.Goods;
+import com.xiafish.pojo.ShoppingCart;
 import com.xiafish.pojo.User;
+import com.xiafish.pojo.UserComment;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,4 +27,10 @@ public interface UserMapper {
     List<Goods> goodsList(Integer userId);
 
     void addGoods(Goods goods);
+    void deleteGoods(Integer userId,List<Integer> goodsids);
+
+    @Select("select * from user_comment where seller_id = #{userid}")
+    List<UserComment> selectcomment(Integer userid);
+    @Select("select * from shopping_car_collect where user_id=#{userid}")
+    List<ShoppingCart> selectShoppingCart(Integer userid);
 }
