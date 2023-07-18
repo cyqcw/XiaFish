@@ -1,7 +1,8 @@
-package com.itheima.utils;
+package com.xiafish.util;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.util.UUID;
@@ -9,12 +10,13 @@ import java.util.UUID;
 /**
  * 阿里云 OSS 工具类
  */
+@Component
 public class AliOSSUtils {
 
     private String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-    private String accessKeyId = "LTAI4GCH1vX6DKqJWxd6nEuW";
-    private String accessKeySecret = "yBshYweHOpqDuhCArrVHwIiBKpyqSL";
-    private String bucketName = "web-tlias";
+    private String accessKeyId = "LTAI5tCKCxKYrATA5SrqE3Ug";
+    private String accessKeySecret = "xt4jvWqnCdHpPYQV08Gk5s8w3TUdpj";
+    private String bucketName = "xiafish";
 
     /**
      * 实现上传图片到OSS

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Component
 public class LoginCheckInterceptor implements HandlerInterceptor {
-    private boolean debug=false;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
@@ -37,7 +36,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         //3.获取令牌
         String jwt=request.getHeader("token");
-        System.out.println(jwt);
         //4.判断令牌是否存在
         if(!StringUtils.hasLength(jwt)){
             log.info("token为空，返回未登录");

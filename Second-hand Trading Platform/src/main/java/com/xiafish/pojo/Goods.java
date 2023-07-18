@@ -21,7 +21,6 @@ public class Goods {
     private LocalDateTime releaseTime;
     private Integer inventory;
     private String  goodsProfile;
-
     private Integer categoryId;
     private String categoryName;
 }

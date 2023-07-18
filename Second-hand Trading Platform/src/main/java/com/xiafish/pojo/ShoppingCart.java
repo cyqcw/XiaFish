@@ -15,9 +15,8 @@ public class ShoppingCart {
     private Integer userId;
     private Integer goodsId;
     private String goodsName;
-    private float goodsPrice;
-    private Integer goodsInventory;
-    private String goodsImage;
+    private Float curPrice;
+    private Integer inventory;
     private Integer collectNum;
     private LocalDateTime collectTime;
 }
