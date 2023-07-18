@@ -41,5 +41,14 @@
             <if test="goodsProfile != null">#{goodsProfile},</if>
         </trim>
     </insert>
+    <delete id="deleteGoods">
+            delete from xiafish.goods where seller_id = #{userId}
+            <if test="goodsids != null and goodsids.size() > 0">
+                and goods_id in
+                <foreach item="item" index="index" collection="goodsids" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+    </delete>
 
 </mapper>

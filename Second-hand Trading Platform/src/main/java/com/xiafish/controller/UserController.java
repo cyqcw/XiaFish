@@ -1,19 +1,20 @@
 package com.xiafish.controller;
 
-import com.xiafish.pojo.Goods;
-import com.xiafish.pojo.Result;
-import com.xiafish.pojo.User;
+import com.xiafish.pojo.*;
 import com.xiafish.service.UserService;
 import com.xiafish.util.JwtUtils;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -96,12 +97,35 @@ public class UserController {
         String jwt=request.getHeader("token");
         Integer userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
         log.info("jwt中获取的用户id：{}", userId);
-        if(userId==good.getSellerId()) {
+        if(Objects.equals(userId, good.getSellerId())) {
+            //设置商品发布时间
+            good.setReleaseTime(LocalDateTime.now());
             log.info("发布商品：{}", good.toString());
             userService.releaseGoods(good);
             return Result.success();
         }
         else return Result.error("sellerId error");
     }
+    @DeleteMapping("user/goods/{goodsids}")
+    public Result deleteGoods(HttpServletRequest request,@PathVariable List<Integer> goodsids)
+    {
+        String jwt=request.getHeader("token");
+        Integer userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
+        log.info("用户 {} 删除商品：{}",userId, goodsids.toString());
+        userService.deleteGoods(userId,goodsids);
+        return Result.success();
+    }
+    @GetMapping("user/comment/{userid}")
+    public Result findComment(@PathVariable Integer userid)
+    {
+        List<UserComment> userCommentsList= userService.findComment(userid);
+        return Result.success(userCommentsList);
+    }
+    @GetMapping("user/shoppingcart/{userid}")
+    public Result viewShoppingCart(@PathVariable Integer userid)
+    {
+        List<ShoppingCart> shoppingCarts=userService.viewShoppingCart(userid);
+        return Result.success(shoppingCarts);
 
+    }
 }
