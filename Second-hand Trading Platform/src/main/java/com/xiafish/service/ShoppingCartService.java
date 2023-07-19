@@ -8,5 +8,5 @@ import java.util.List;
 public interface ShoppingCartService {
     void addToCart(Integer userId, Integer goodsId, Integer collectNum);
 
-    List<ShoppingCart> getCartList(Integer userId, Integer page, Integer pageSize);
+    List<ShoppingCart> getCart(Integer userId, Integer page, Integer pageSize);
 }

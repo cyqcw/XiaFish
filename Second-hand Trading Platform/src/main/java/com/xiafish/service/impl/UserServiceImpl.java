@@ -58,8 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Goods> getGoodsByUserId(Integer userId) {
-        List<Goods> goodsList=userMapper.goodsList(userId);
-        return goodsList;
+        return userMapper.goodsList(userId);
     }
 
     @Override
@@ -82,6 +81,11 @@ public class UserServiceImpl implements UserService {
     public List<ShoppingCart> viewShoppingCart(Integer userid) {
         List<ShoppingCart> shoppingCartsList=userMapper.selectShoppingCart(userid);
         return shoppingCartsList;
+    }
+
+    @Override
+    public void updateHeadImg(Integer userId, String url) {
+        userMapper.updateHeadImg(userId,url);
     }
 
 }

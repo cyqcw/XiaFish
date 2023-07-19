@@ -14,5 +14,9 @@ public interface ShoppingCartMapper {
             "values (#{userId},#{goodsId},#{collectNum},#{now})")
     void insertToCart(Integer userId, Integer goodsId, Integer collectNum, LocalDateTime now);
 
-    List<ShoppingCart> getCartListByUserId(Integer userId, Integer page, Integer pageSize);
+    @Select("select xiafish.shopping_cart.*,xiafish.goods.* " +
+            "from xiafish.shopping_cart LEFT JOIN xiafish.goods ON (shopping_cart.goods_id=goods.goods_id)" +
+            "where user_id = #{userId} ")
+    List<ShoppingCart> getShoppingCartsList(Integer userId);
+
 }

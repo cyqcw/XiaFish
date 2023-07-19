@@ -79,37 +79,36 @@ public class UserController {
         }
     }
     @GetMapping("user/goods")
-    public Result getGoodsByUserId( @PathVariable(value = "userid") Integer userId)
+    public Result getGoodsByUserId(@RequestParam("userId")  Integer userId)
     {
             List<Goods> goodsList = userService.getGoodsByUserId(userId);
             return Result.success(goodsList);
     }
     @PutMapping("user/release")
-    public Result releaseGoods(@RequestBody Goods good)
+    public Result releaseGoods(@RequestBody Goods goods)
     {
             //设置商品发布时间
-            good.setReleaseTime(LocalDateTime.now());
-            log.info("发布商品：{}", good.toString());
-            userService.releaseGoods(good);
+            goods.setReleaseTime(LocalDateTime.now());
+            log.info("发布商品：{}", goods);
+            userService.releaseGoods(goods);
             return Result.success();
     }
-    @DeleteMapping("user/goods/{goodsids}")
-    public Result deleteGoods(HttpServletRequest request,@PathVariable List<Integer> goodsids)
+    @DeleteMapping("user/goods/{goodsIds}")
+    public Result deleteGoods(@RequestParam("userId") Integer userId,
+                              @PathVariable List<Integer> goodsIds)
     {
-        String jwt=request.getHeader("token");
-        Integer userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
-        log.info("用户 {} 删除商品：{}",userId, goodsids.toString());
-        userService.deleteGoods(userId,goodsids);
+        log.info("用户 {} 删除商品：{}",userId, goodsIds.toString());
+        userService.deleteGoods(userId,goodsIds);
         return Result.success();
     }
-    @GetMapping("user/comment/{userid}")
-    public Result findComment(@PathVariable Integer userid)
+    @GetMapping("user/comment/")
+    public Result findComment(@RequestParam("userId") Integer userId)
     {
-        List<UserComment> userCommentsList= userService.findComment(userid);
+        List<UserComment> userCommentsList= userService.findComment(userId);
         return Result.success(userCommentsList);
     }
-    @GetMapping("user/shoppingcart/{userid}")
-    public Result viewShoppingCart(@PathVariable Integer userid)
+    @GetMapping("user/shoppingcart")
+    public Result viewShoppingCart(@RequestParam("userId") Integer userid)
     {
         List<ShoppingCart> shoppingCarts=userService.viewShoppingCart(userid);
         return Result.success(shoppingCarts);
