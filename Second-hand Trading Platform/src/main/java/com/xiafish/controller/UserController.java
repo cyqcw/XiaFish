@@ -22,43 +22,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @PostMapping("/login")
-    public Result login(@RequestBody Map<String, Object> loginBody)
-    {
-        String username=(String) loginBody.get("username");
-        String password=(String) loginBody.get("password");
-        Map<String, Object> claims = new HashMap<>();
-        Integer userId;
-        try {
-            userId = userService.getIdByUserNameAndPassword(username, password);
-            claims.put("id", userId);
-            String jwt = JwtUtils.generateJwt(claims);
-            Map<String, Object> responseData = new HashMap<>();
-            responseData.put("userId", userId);
-            responseData.put("token", jwt);
-            return Result.success(responseData);
-        }catch (RuntimeException e)
-        {
-            log.info(e.getMessage());
-            return Result.error("Incorrect username or password");
-        }
-    }
-    @PostMapping("/signup")
-    public Result signUp(@RequestBody Map<String, Object> loginBody)
-    {
-         String username=(String) loginBody.get("username");
-         String password=(String) loginBody.get("password");
-         try
-         {
-             userService.addUser(username,password);
-             return Result.success();
-         }
-         catch (RuntimeException e)
-         {
-             log.info(e.getMessage());
-             return Result.error("the username has existed");
-         }
-    }
 
     @GetMapping("/user")
     public Result getUserInfo(@RequestParam("userId") Integer userId){
@@ -108,7 +71,7 @@ public class UserController {
         return Result.success(userOrdersList);
     }
     @GetMapping("user/comment/{userid}")
-    public Result findComment(@PathVariable Integer userid)
+    public Result findComment(@PathVariable Integer userId)
     {
         List<UserComment> userCommentsList= userService.findComment(userId);
         return Result.success(userCommentsList);

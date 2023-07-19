@@ -9,9 +9,9 @@ public interface UserService {
 
     void updateUser(User user);
 
-    Integer getIdByUserNameAndPassword(String username,String password);
 
-    void addUser(String username, String password);
+
+
 
     List<Goods> getGoodsByUserId(Integer userId);
 
