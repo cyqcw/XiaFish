@@ -107,8 +107,8 @@ public class UserController {
         List<Order> userOrdersList= userService.findOrder(userid);
         return Result.success(userOrdersList);
     }
-    @GetMapping("user/comment/{userid}")
-    public Result findComment(@PathVariable Integer userid)
+    @GetMapping("user/comment/{userId}")
+    public Result findComment(@PathVariable Integer userId)
     {
         List<UserComment> userCommentsList= userService.findComment(userId);
         return Result.success(userCommentsList);
