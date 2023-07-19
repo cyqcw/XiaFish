@@ -6,6 +6,7 @@ import com.xiafish.pojo.ReturnOrder;
 import com.xiafish.pojo.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AdminService {
@@ -24,6 +25,6 @@ public interface AdminService {
 
     void updateUser(User user);
 
-    List<ReturnOrder> getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDate begin, LocalDate end);
+    List<ReturnOrder> getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end);
 
 }

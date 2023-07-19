@@ -1,10 +1,7 @@
 package com.xiafish.service.impl;
 
 import com.xiafish.mapper.UserMapper;
-import com.xiafish.pojo.Goods;
-import com.xiafish.pojo.ShoppingCart;
-import com.xiafish.pojo.User;
-import com.xiafish.pojo.UserComment;
+import com.xiafish.pojo.*;
 import com.xiafish.service.UserService;
 import com.xiafish.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +78,12 @@ public class UserServiceImpl implements UserService {
     public List<ShoppingCart> viewShoppingCart(Integer userid) {
         List<ShoppingCart> shoppingCartsList=userMapper.selectShoppingCart(userid);
         return shoppingCartsList;
+    }
+
+    @Override
+    public List<Order> findOrder(Integer userid) {
+        List<Order>userOrdersList=userMapper.selectOrder(userid);
+        return userOrdersList;
     }
 
     @Override

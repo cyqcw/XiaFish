@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -19,7 +20,7 @@ public interface AdminMapper {
 
      void updateUser(User user);
 
-     List<ReturnOrder> getOrder(Integer buyerId, Integer sellerId, LocalDate begin, LocalDate end);
+     List<ReturnOrder> getOrder(Integer buyerId, Integer sellerId, LocalDateTime begin, LocalDateTime end);
      @Select("select user_id from xiafish.user where user_name=#{userName}")
      Integer getUserIdByUserName(String userName);
 

@@ -101,8 +101,14 @@ public class UserController {
         userService.deleteGoods(userId,goodsIds);
         return Result.success();
     }
-    @GetMapping("user/comment/")
-    public Result findComment(@RequestParam("userId") Integer userId)
+    @GetMapping("user/order/{userid}")
+    public Result findOrder(@PathVariable Integer userid)
+    {
+        List<Order> userOrdersList= userService.findOrder(userid);
+        return Result.success(userOrdersList);
+    }
+    @GetMapping("user/comment/{userid}")
+    public Result findComment(@PathVariable Integer userid)
     {
         List<UserComment> userCommentsList= userService.findComment(userId);
         return Result.success(userCommentsList);

@@ -1,9 +1,6 @@
 package com.xiafish.service;
 
-import com.xiafish.pojo.Goods;
-import com.xiafish.pojo.ShoppingCart;
-import com.xiafish.pojo.User;
-import com.xiafish.pojo.UserComment;
+import com.xiafish.pojo.*;
 
 import java.util.List;
 
@@ -26,5 +23,6 @@ public interface UserService {
 
     List<ShoppingCart> viewShoppingCart(Integer userid);
 
+    List<Order> findOrder(Integer userid);
     void updateHeadImg(Integer userId, String url);
 }

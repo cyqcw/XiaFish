@@ -1,9 +1,6 @@
 package com.xiafish.mapper;
 
-import com.xiafish.pojo.Goods;
-import com.xiafish.pojo.ShoppingCart;
-import com.xiafish.pojo.User;
-import com.xiafish.pojo.UserComment;
+import com.xiafish.pojo.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -29,8 +26,10 @@ public interface UserMapper {
 
     @Select("select * from user_comment where seller_id = #{userid}")
     List<UserComment> selectcomment(Integer userid);
-    @Select("select * from shopping_car_collect where user_id=#{userid}")
+    @Select("select * from shopping_cart where user_id=#{userid}")
     List<ShoppingCart> selectShoppingCart(Integer userid);
+    @Select("select * from xiafish.`order` where buyer_id = #{userid}")
+    List<Order> selectOrder(Integer userid);
 
     @Update("update xiafish.user set user_photo=#{url} where user_id=#{userId}")
     void updateHeadImg(Integer userId, String url);

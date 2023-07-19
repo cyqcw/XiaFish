@@ -62,7 +62,7 @@
     <update id="updateUser" parameterType="com.xiafish.pojo.User">
         UPDATE user
         <set>
-            <if test="username != null">user_name = #{username},</if>
+            <if test="userName != null">user_name = #{userName},</if>
             <if test="userGender != null">user_gender = #{userGender},</if>
             <if test="userPhoneNum != null">user_phone_num = #{userPhoneNum},</if>
             <if test="userEmail != null">user_email = #{userEmail},</if>
@@ -77,13 +77,14 @@
     </update>
     <select id="getOrder" resultType="com.xiafish.pojo.ReturnOrder">
         select o.*,buyer.user_name as buyerName,seller.user_name as sellerName
-        from order o
+        from `xiafish`.`order` o
         left join user buyer on o.buyer_id = buyer.user_id
         left join user seller on o.seller_id = seller.user_id
         <where>
             <if test="buyerId != null">buyer_id = #{buyerId}</if>
-            <if test="sellerId != null">seller_id = #{sellerId}</if>
-            <if test="begin != null and end != null">orderDateTime between begin and end</if>
+            <if test="sellerId != null">and seller_id = #{sellerId}</if>
+            <if test="begin != null">and order_date_time &gt;= #{begin}</if>
+            <if test="end != null">and order_date_time &lt;= #{end}</if>
         </where>
     </select>
 </mapper>
