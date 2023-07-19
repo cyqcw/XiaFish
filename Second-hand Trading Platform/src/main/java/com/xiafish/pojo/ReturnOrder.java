@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class ReturnOrder {
     private Integer orderNum;
     private float orderSumPrice;
     private String orderStatus;
-    private LocalDate orderDateTime;
+    private LocalDateTime orderDateTime;
     private String buyerName;
     private String sellerName;
 }

@@ -30,9 +30,9 @@ public class GoodsController {
     }
 
     @PostMapping("/goods/purchase")
-    public Result purchaseById(@RequestParam("user_id") Integer userId,
-                               @RequestParam("goods_id") Integer goodsId,
-                               @RequestParam(value = "order_num", defaultValue = "1") Integer orderNum){
+    public Result purchaseById(@RequestParam("buyerId") Integer userId,
+                               @RequestParam("goodsId") Integer goodsId,
+                               @RequestParam(value = "orderNum", defaultValue = "1") Integer orderNum){
         log.info("用户 {} 直接购买商品 {}，数量为 {}",userId,goodsId,orderNum);
         goodsService.purchaseById(userId,goodsId,orderNum);
         return  Result.success();
