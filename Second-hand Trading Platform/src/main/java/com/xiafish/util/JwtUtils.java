@@ -14,18 +14,16 @@ public class JwtUtils {
     public static String generateJwt(Map<String,Object> claims){
         //设置token有效时间为1个小时
         long expire = 4320000L;
-        String jwt= Jwts.builder()
+        return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256,signKey)//签名算法
                 .setClaims(claims)//自定义内容（载荷）
                 .setExpiration(new Date(System.currentTimeMillis()+ expire))//设置有效期为1h
                 .compact();
-        return jwt;
     }
 
     public static Claims parseJwt(String jwt){
-        Claims claims=Jwts.parser()
+        return Jwts.parser()
                 .setSigningKey(signKey)
                 .parseClaimsJws(jwt).getBody();
-        return claims;
     }
 }

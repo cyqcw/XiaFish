@@ -24,4 +24,5 @@ public interface UserService {
     List<ShoppingCart> viewShoppingCart(Integer userid);
 
     List<Order> findOrder(Integer userid);
+    void updateHeadImg(Integer userId, String url);
 }

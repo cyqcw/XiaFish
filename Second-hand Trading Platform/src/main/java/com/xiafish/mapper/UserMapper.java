@@ -1,10 +1,7 @@
 package com.xiafish.mapper;
 
 import com.xiafish.pojo.*;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,8 +14,8 @@ public interface UserMapper {
     void updateUser(User user);
 
 
-
-    @Select("select goods.* from xiafish.goods where seller_id=#{userId}")
+    @Select("select * from xiafish.goods,xiafish.goods_category " +
+            "where goods_category.category_id=goods.goods_category_id and seller_id=#{userId}")
     List<Goods> goodsList(Integer userId);
 
     void addGoods(Goods goods);
@@ -30,4 +27,7 @@ public interface UserMapper {
     List<ShoppingCart> selectShoppingCart(Integer userid);
     @Select("select * from xiafish.`order` where buyer_id = #{userid}")
     List<Order> selectOrder(Integer userid);
+
+    @Update("update xiafish.user set user_photo=#{url} where user_id=#{userId}")
+    void updateHeadImg(Integer userId, String url);
 }

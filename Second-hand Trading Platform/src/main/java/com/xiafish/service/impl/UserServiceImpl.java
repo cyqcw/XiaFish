@@ -20,25 +20,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) throws RuntimeException{
-        String email = user.getUserEmail();
-        String phoneNumber = user.getUserPhoneNum();
-
-        // 验证邮箱和电话号码的格式
-        if (email!=null && !ValidationUtils.isValidEmail(email)) {
-            throw new IllegalArgumentException("Invalid email format");
-        }
-
-        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
-            throw new IllegalArgumentException("Invalid phone number format");
-        }
-        try {
+//        String email = user.getUserEmail();
+//        String phoneNumber = user.getUserPhoneNum();
+//
+//        // 验证邮箱和电话号码的格式
+//        if (email!=null && !ValidationUtils.isValidEmail(email)) {
+//            throw new IllegalArgumentException("Invalid email format");
+//        }
+//
+//        if (phoneNumber!=null && !ValidationUtils.isValidPhoneNumber(phoneNumber)) {
+//            throw new IllegalArgumentException("Invalid phone number format");
+//        }
             userMapper.updateUser(user);
-        }catch (Exception e)
-        {
-            throw new RuntimeException("update failed");
-        }
     }
-
 
 
 
@@ -46,8 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Goods> getGoodsByUserId(Integer userId) {
-        List<Goods>goodsList=userMapper.goodsList(userId);
-        return goodsList;
+        return userMapper.goodsList(userId);
     }
 
     @Override
@@ -76,6 +69,11 @@ public class UserServiceImpl implements UserService {
     public List<Order> findOrder(Integer userid) {
         List<Order>userOrdersList=userMapper.selectOrder(userid);
         return userOrdersList;
+    }
+
+    @Override
+    public void updateHeadImg(Integer userId, String url) {
+        userMapper.updateHeadImg(userId,url);
     }
 
 }

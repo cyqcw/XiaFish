@@ -12,8 +12,11 @@ import java.util.List;
 public interface ShoppingCartMapper {
     @Insert("insert into xiafish.shopping_cart (user_id, goods_id, collect_num, collect_time) " +
             "values (#{userId},#{goodsId},#{collectNum},#{now})")
-    void insertTocart(Integer userId, Integer goodsId, Integer collectNum, LocalDateTime now);
-    @Select("select * from shopping_cart where user_id = #{userId}")
+    void insertToCart(Integer userId, Integer goodsId, Integer collectNum, LocalDateTime now);
+
+    @Select("select xiafish.shopping_cart.*,xiafish.goods.* " +
+            "from xiafish.shopping_cart LEFT JOIN xiafish.goods ON (shopping_cart.goods_id=goods.goods_id)" +
+            "where user_id = #{userId} ")
     List<ShoppingCart> getShoppingCartsList(Integer userId);
 
 }
