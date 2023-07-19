@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,7 +49,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<ReturnOrder> getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDate begin, LocalDate end) {
+    public List<ReturnOrder> getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end) {
 
         // 设置分页参数
         PageHelper.startPage(page,pageSize);
@@ -56,9 +57,9 @@ public class AdminServiceImpl implements AdminService {
         Integer sellerId =adminMapper.getUserIdByUserName(sellerName);
         //执行条件分页查询
         List<ReturnOrder> orderList=adminMapper.getOrder(buyerId,sellerId,begin,end);
-        //获取查询结果
-        Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
+//        //获取查询结果
+//        Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
         //返回查询结果
-        return p.getResult();
+        return orderList;
     }
 }

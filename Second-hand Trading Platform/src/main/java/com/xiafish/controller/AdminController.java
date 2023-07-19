@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -54,13 +56,19 @@ public class AdminController {
         return Result.success();
     }
     @GetMapping("admin/orders")
-    public Result getOrders(@RequestParam(name="page",defaultValue = "1")Integer page,
-                            @RequestParam(name="pageSize",defaultValue = "10")Integer pageSize,
-                            @RequestParam(name="buyerName",required = false)String buyerName,
-                            @RequestParam(name="sellerName",required = false)String sellerName,
-                            @RequestParam(name="begin",required = false) LocalDate begin,
-                            @RequestParam(name="buyerName",required = false)LocalDate end)
+    public Result getOrders(@RequestBody Map<String,Object> orderBody)
     {
+        Integer page=(Integer) orderBody.get("page");
+        if(page == null) page=1;
+        Integer pageSize=(Integer)orderBody.get("pageSize");
+        if(pageSize==null)pageSize=10;
+        String buyerName=(String)orderBody.get("buyerName");
+        String sellerName=(String)orderBody.get("sellerName");
+        String beginStr = (String) orderBody.get("begin");
+        LocalDateTime begin = beginStr != null ? LocalDateTime.parse(beginStr) : null;
+        String endStr = (String) orderBody.get("end");
+        LocalDateTime end = endStr != null ? LocalDateTime.parse(endStr) : null;
+
         log.info("管理员查看历史订单，卖家{}，买家{}，开始时间{}，结束时间{}",sellerName,buyerName,begin,end);
         List<ReturnOrder> orderList=adminService.getOrder(page,pageSize,buyerName,sellerName,begin,end);
         return Result.success(orderList);
