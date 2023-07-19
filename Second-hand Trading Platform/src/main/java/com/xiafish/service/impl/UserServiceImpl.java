@@ -39,24 +39,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public Integer getIdByUserNameAndPassword(String username,String password)throws RuntimeException{
-        Integer userId=userMapper.getIdByNameAndPassword(username,password);
-        if(userId == null)throw new RuntimeException("用户名或密码错误");
-        return userId;
-    }
 
-    @Override
-    public void addUser(String username, String password) throws RuntimeException{
-        try {
-            userMapper.addUser(username, password);
-        }catch (RuntimeException e)
-        {
-            e.printStackTrace();
-         throw new RuntimeException("用户名已存在");
-        }
 
-    }
+
 
 
     @Override
