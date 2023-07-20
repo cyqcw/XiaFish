@@ -42,9 +42,7 @@ public class LoginController implements HandlerInterceptor {
         }
 
         userStatus=loginService.getStatusByUserId(userId);
-        if(!Objects.equals(userStatus, (Integer) loginBody.get("password"))) {
-            return Result.error("Not admin");
-        }
+
         claims.put("id", userId);
         claims.put("status",userStatus);
         String jwt = JwtUtils.generateJwt(claims);

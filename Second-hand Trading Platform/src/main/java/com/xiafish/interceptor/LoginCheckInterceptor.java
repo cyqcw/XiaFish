@@ -18,13 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class LoginCheckInterceptor implements HandlerInterceptor {
 
-    private Integer userId;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //1.get url
         String url= request.getRequestURI();
-        String userIdPath = request.getParameter("userId");
         log.info("url:{}",url);
 
         //2.判断url是否包含login或者signup
@@ -57,6 +55,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
 
         //5.解析token
+        Integer userId;
         try {
             userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
         }catch (Exception e){
