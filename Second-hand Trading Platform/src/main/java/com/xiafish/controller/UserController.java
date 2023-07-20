@@ -22,46 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @PostMapping("/login")
-    public Result login(@RequestBody Map<String, Object> loginBody)
-    {
-        String username=(String) loginBody.get("username");
-        String password=(String) loginBody.get("password");
-        Map<String, Object> claims = new HashMap<>();
-        Integer userId;
-        try {
-            userId = userService.getIdByUserNameAndPassword(username, password);
-            claims.put("id", userId);
-            String jwt = JwtUtils.generateJwt(claims);
-            Map<String, Object> responseData = new HashMap<>();
-            responseData.put("userId", userId);
-            responseData.put("token", jwt);
-            return Result.success(responseData);
-        }catch (RuntimeException e)
-        {
-            log.info(e.getMessage());
-            return Result.error("Incorrect username or password");
-        }
-    }
-    @PostMapping("/signup")
-    public Result signUp(@RequestBody Map<String, Object> loginBody)
-    {
-         String username=(String) loginBody.get("username");
-         String password=(String) loginBody.get("password");
-         try
-         {
-             userService.addUser(username,password);
-             return Result.success();
-         }
-         catch (RuntimeException e)
-         {
-             log.info(e.getMessage());
-             return Result.error("the username has existed");
-         }
-    }
 
     @GetMapping("/user")
-    public Result getUserInfo(@RequestParam("userId") Integer userId){
+    public Result getUserInfo(@RequestAttribute("userId")  Integer userId){
         log.info("查询的用户id：{}", userId);
         User user = userService.getUserById(userId);
         return Result.success(user);
@@ -79,7 +42,7 @@ public class UserController {
         }
     }
     @GetMapping("user/goods")
-    public Result getGoodsByUserId(@RequestParam("userId")  Integer userId)
+    public Result getGoodsByUserId(@RequestAttribute("userId")  Integer userId)
     {
             List<Goods> goodsList = userService.getGoodsByUserId(userId);
             return Result.success(goodsList);
@@ -94,8 +57,8 @@ public class UserController {
             return Result.success();
     }
     @DeleteMapping("user/goods/{goodsIds}")
-    public Result deleteGoods(@RequestParam("userId") Integer userId,
-                              @PathVariable List<Integer> goodsIds)
+    public Result deleteGoods(@PathVariable List<Integer> goodsIds,
+                              @RequestAttribute("userId")  Integer userId)
     {
         log.info("用户 {} 删除商品：{}",userId, goodsIds.toString());
         userService.deleteGoods(userId,goodsIds);
@@ -114,9 +77,9 @@ public class UserController {
         return Result.success(userCommentsList);
     }
     @GetMapping("user/shoppingcart")
-    public Result viewShoppingCart(@RequestParam("userId") Integer userid)
+    public Result viewShoppingCart(@RequestAttribute("userId")  Integer userId)
     {
-        List<ShoppingCart> shoppingCarts=userService.viewShoppingCart(userid);
+        List<ShoppingCart> shoppingCarts=userService.viewShoppingCart(userId);
         return Result.success(shoppingCarts);
     }
 }

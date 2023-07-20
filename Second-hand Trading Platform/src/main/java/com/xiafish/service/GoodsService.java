@@ -10,4 +10,6 @@ public interface GoodsService {
     Goods getGoodsById(Integer id);
 
     void purchaseById(Integer userId, Integer goodsId, Integer orderNum);
+
+    void uploadImgs(Integer goodsId, List<String> urls);
 }

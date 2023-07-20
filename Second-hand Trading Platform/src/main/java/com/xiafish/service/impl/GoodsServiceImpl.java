@@ -32,4 +32,9 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.purchaseById(userId,sellerId,goodsId,orderNum,
                 orderNum*goodsPrice,orderStatus,LocalDateTime.now());
     }
+
+    @Override
+    public void uploadImgs(Integer goodsId, List<String> urls) {
+        goodsMapper.insertImages(goodsId,urls);
+    }
 }

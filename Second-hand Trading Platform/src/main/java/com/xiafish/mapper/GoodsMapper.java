@@ -28,4 +28,6 @@ public interface GoodsMapper {
             " values(#{buyerId},#{sellerId},#{goodsId},#{orderNum},#{orderSumPrice},#{orderStatus},#{now})")
     void purchaseById(Integer buyerId, Integer sellerId, Integer goodsId, Integer orderNum,
                       float orderSumPrice, String orderStatus, LocalDateTime now);
+
+    void insertImages(Integer goodsId, List<String> urls);
 }

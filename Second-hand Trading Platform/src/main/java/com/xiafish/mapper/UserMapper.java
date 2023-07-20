@@ -13,10 +13,7 @@ public interface UserMapper {
 
     void updateUser(User user);
 
-    @Select("select user_id from xiafish.user where user_name=#{username} and user_passwd=#{password}")
-    Integer getIdByNameAndPassword(String username,String password);
-    @Insert("insert into xiafish.user(user_name,user_passwd) values(#{username},#{password})")
-    void addUser(String username, String password);
+
     @Select("select * from xiafish.goods,xiafish.goods_category " +
             "where goods_category.category_id=goods.goods_category_id and seller_id=#{userId}")
     List<Goods> goodsList(Integer userId);
