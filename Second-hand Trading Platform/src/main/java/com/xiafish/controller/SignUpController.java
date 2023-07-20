@@ -4,15 +4,17 @@ import com.xiafish.pojo.Result;
 import com.xiafish.service.SignUpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 
 @Slf4j
-@Controller
+@RestController
 public class SignUpController {
     @Autowired
     private SignUpService signUpService;
@@ -21,9 +23,13 @@ public class SignUpController {
     {
         String username=(String) loginBody.get("username");
         String password=(String) loginBody.get("password");
+        // 使用BCryptPasswordEncoder进行密码加密
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encryptedPassword = encoder.encode(password);
+
         try
         {
-            signUpService.addUser(username,password);
+            signUpService.addUser(username,encryptedPassword);
             return Result.success();
         }
         catch (RuntimeException e)

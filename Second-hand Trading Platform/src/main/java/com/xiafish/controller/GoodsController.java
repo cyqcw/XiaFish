@@ -1,6 +1,7 @@
 package com.xiafish.controller;
 
 import com.xiafish.pojo.Goods;
+import com.xiafish.pojo.GoodsComment;
 import com.xiafish.pojo.Result;
 import com.xiafish.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @Slf4j
 @RestController
 public class GoodsController {
@@ -37,5 +37,11 @@ public class GoodsController {
         goodsService.purchaseById(userId,goodsId,orderNum);
         return  Result.success();
     }
-
+    @PutMapping("/goods/comment")
+    public Result releaseComments(@RequestBody GoodsComment goodsComment)
+    {
+        log.info("发布商品评价 {}",goodsComment.toString());
+        goodsService.releaseComment(goodsComment);
+        return Result.success();
+    }
 }

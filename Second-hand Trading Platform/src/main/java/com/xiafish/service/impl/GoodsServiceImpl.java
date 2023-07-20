@@ -2,6 +2,7 @@ package com.xiafish.service.impl;
 
 import com.xiafish.mapper.GoodsMapper;
 import com.xiafish.pojo.Goods;
+import com.xiafish.pojo.GoodsComment;
 import com.xiafish.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,10 @@ public class GoodsServiceImpl implements GoodsService {
 
         goodsMapper.purchaseById(userId,sellerId,goodsId,orderNum,
                 orderNum*goodsPrice,orderStatus,LocalDateTime.now());
+    }
+
+    @Override
+    public void releaseComment(GoodsComment goodsComment) {
+        goodsMapper.addComment(goodsComment);
     }
 }

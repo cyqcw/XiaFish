@@ -70,7 +70,7 @@ public class AdminController {
         LocalDateTime end = endStr != null ? LocalDateTime.parse(endStr) : null;
 
         log.info("管理员查看历史订单，卖家{}，买家{}，开始时间{}，结束时间{}",sellerName,buyerName,begin,end);
-        List<ReturnOrder> orderList=adminService.getOrder(page,pageSize,buyerName,sellerName,begin,end);
+        PageBean orderList=adminService.getOrder(page,pageSize,buyerName,sellerName,begin,end);
         return Result.success(orderList);
     }
 

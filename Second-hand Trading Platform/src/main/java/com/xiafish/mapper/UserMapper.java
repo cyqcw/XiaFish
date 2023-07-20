@@ -30,4 +30,7 @@ public interface UserMapper {
 
     @Update("update xiafish.user set user_photo=#{url} where user_id=#{userId}")
     void updateHeadImg(Integer userId, String url);
+
+    void updateGoods(Goods goods);
+
 }

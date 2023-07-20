@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiafish.mapper.OrderMapper">
+    <insert id="addOrder" parameterType="com.xiafish.pojo.Order">
+        INSERT INTO xiafish.order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerId != null">buyer_id,</if>
+            <if test="sellerId != null">seller_id,</if>
+            <if test="goodsId != null">goods_id,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="orderSumPrice != null">order_sum_price,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="orderDateTime != null">order_date_time,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buyerId != null">#{buyerId},</if>
+            <if test="sellerId != null">#{sellerId},</if>
+            <if test="goodsId != null">#{goodsId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="orderSumPrice != null">#{orderSumPrice},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="orderDateTime != null">#{orderDateTime},</if>
+        </trim>
+    </insert>
+</mapper>

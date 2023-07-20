@@ -1,5 +1,6 @@
 package com.xiafish.service;
+import java.util.Map;
 
 public interface LoginService {
-    Integer getIdByUserNameAndPassword(String username,String password);
+    Map<String, Object> getIdByUserName(String username);
 }

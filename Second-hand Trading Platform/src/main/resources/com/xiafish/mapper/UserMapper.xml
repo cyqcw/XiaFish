@@ -51,4 +51,18 @@
             </if>
     </delete>
 
+    <update id="updateGoods" parameterType="com.xiafish.pojo.Goods">
+        UPDATE xiafish.goods
+        <set>
+            <if test="goodsName != null">goods_name=#{goodsName},</if>
+            <if test="oriPrice != null">ori_price=#{oriPrice},</if>
+            <if test="curPrice != null">cur_price=#{curPrice},</if>
+            <if test="goodsCategoryId != null">goods_category_id=#{goodsCategoryId},</if>
+            <if test="sellerId != null">seller_id=#{sellerId},</if>
+            <if test="releaseTime != null">release_time=#{releaseTime},</if>
+            <if test="inventory != null">inventory=#{inventory},</if>
+            <if test="goodsProfile != null">goods_profile=#{goodsProfile},</if>
+        </set>
+        WHERE goods_id=#{goodsId}
+    </update>
 </mapper>

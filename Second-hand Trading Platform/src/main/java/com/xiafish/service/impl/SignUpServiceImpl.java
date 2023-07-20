@@ -15,7 +15,7 @@ public class SignUpServiceImpl implements SignUpService {
             signUpMapper.addUser(username, password);
         }catch (RuntimeException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new RuntimeException("用户名已存在");
         }
 
