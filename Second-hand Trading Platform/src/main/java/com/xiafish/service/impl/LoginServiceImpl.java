@@ -18,4 +18,10 @@ public class LoginServiceImpl implements LoginService {
         if(userId == null)throw new RuntimeException("用户不存在");
         return userIdAndPasswd;
     }
+
+    @Override
+    public Integer getStatusByUserId(Integer userId)
+    {
+        return loginMapper.getStatusByUserId(userId);
+    }
 }

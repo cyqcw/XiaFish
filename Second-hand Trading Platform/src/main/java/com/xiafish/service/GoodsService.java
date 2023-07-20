@@ -14,4 +14,7 @@ public interface GoodsService {
 
     void releaseComment(GoodsComment goodsComment);
 
+
+    void uploadImgs(Integer goodsId, List<String> urls);
+
 }

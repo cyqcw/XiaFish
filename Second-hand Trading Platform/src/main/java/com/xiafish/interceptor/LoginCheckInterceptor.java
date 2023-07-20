@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.xiafish.pojo.Result;
 import com.xiafish.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 @Component
 public class LoginCheckInterceptor implements HandlerInterceptor {
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //1.get url
         String url= request.getRequestURI();
-        String userIdPath = request.getParameter("userId");
         log.info("url:{}",url);
 
         //2.判断url是否包含login或者signup
@@ -31,6 +33,11 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         if(url.contains("signup")){
             log.info("注册操作，放行...");
+            return true;
+        }
+
+        if(url.contains("goods/all")){
+            log.info("主页面，放行...");
             return true;
         }
 
@@ -47,10 +54,10 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        Integer userIdToken;
         //5.解析token
+        Integer userId;
         try {
-            userIdToken = JwtUtils.parseJwt(jwt).get("id", Integer.class);
+            userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
         }catch (Exception e){
             e.printStackTrace();
             log.info("令牌解析失败");
@@ -61,15 +68,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             response.getWriter().write(notLogin);
             return false;
         }
-
-        if (!userIdToken.equals(Integer.parseInt(userIdPath))) {
-            log.info("userId 校验失败");
-            Result error = Result.error("INVALID_USERID");
-            String invalidUserId = JSONObject.toJSONString(error);
-            response.getWriter().write(invalidUserId);
-            return false;
-        }
-
+        request.setAttribute("userId", userId);
         //6.放行
         return true;
     }
