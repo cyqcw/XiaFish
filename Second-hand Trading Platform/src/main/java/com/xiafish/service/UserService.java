@@ -9,10 +9,6 @@ public interface UserService {
 
     void updateUser(User user);
 
-
-
-
-
     List<Goods> getGoodsByUserId(Integer userId);
 
     void releaseGoods(Goods goods);
@@ -25,4 +21,7 @@ public interface UserService {
 
     List<Order> findOrder(Integer userid);
     void updateHeadImg(Integer userId, String url);
+
+    void updateUserGoods(Goods goods);
+
 }

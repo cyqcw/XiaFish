@@ -1,6 +1,7 @@
 package com.xiafish.mapper;
 
 import com.xiafish.pojo.Goods;
+import com.xiafish.pojo.GoodsComment;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -29,5 +30,9 @@ public interface GoodsMapper {
     void purchaseById(Integer buyerId, Integer sellerId, Integer goodsId, Integer orderNum,
                       float orderSumPrice, String orderStatus, LocalDateTime now);
 
+    @Insert("insert into xiafish.goods_comment(buyer_id,goods_id,goods_comment_content) values(#{buyerId},#{goodsId},#{goodsCommentContent})")
+    void addComment(GoodsComment goodsComment);
+
     void insertImages(Integer goodsId, List<String> urls);
+
 }

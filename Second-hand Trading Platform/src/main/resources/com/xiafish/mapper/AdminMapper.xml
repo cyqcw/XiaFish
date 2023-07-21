@@ -5,19 +5,19 @@
 <mapper namespace="com.xiafish.mapper.AdminMapper">
     <select id="list" resultType="com.xiafish.pojo.User">
         select *
-        from user
+        from xiafish.user
         <where>
             <if test="userId != null">user_id = #{userId},</if>
-            <if test="userName != null">user_name like concat('%',#{userName},'%'),</if>
-            <if test="userGender != null">user_gender= #{userGender},</if>
-            <if test="userPhoneNum != null">user_phone_num = #{userPhoneNum},</if>
-            <if test="userEmail != null">user_email = #{userEmail},</if>
-            <if test="userPasswd != null">user_passwd = #{userPasswd},</if>
-            <if test="userStatus != null">user_status = #{userStatus},</if>
-            <if test="userPhoto != null">user_photo = #{userPhoto},</if>
-            <if test="userCampus != null">user_campus = #{userCampus},</if>
-            <if test="userNickname != null">user_nickname like concat('%',#{userNickname},'%'),</if>
-            <if test="userProfile != null">user_profile = #{userProfile},</if>
+            <if test="userName != null">and user_name like concat('%',#{userName},'%') </if>
+            <if test="userGender != null">and user_gender = #{userGender} </if>
+            <if test="userPhoneNum != null">and user_phone_num = #{userPhoneNum} </if>
+            <if test="userEmail != null">and user_email = #{userEmail} </if>
+            <if test="userPasswd != null">and user_passwd = #{userPasswd} </if>
+            <if test="userStatus != null">and user_status = #{userStatus} </if>
+            <if test="userPhoto != null">and user_photo = #{userPhoto} </if>
+            <if test="userCampus != null">and user_campus = #{userCampus} </if>
+            <if test="userNickname != null">and user_nickname like concat('%',#{userNickname},'%') </if>
+            <if test="userProfile != null">and user_profile = #{userProfile} </if>
         </where>
     </select>
     <delete id="deleteUser">
@@ -77,9 +77,9 @@
     </update>
     <select id="getOrder" resultType="com.xiafish.pojo.ReturnOrder">
         select o.*,buyer.user_name as buyerName,seller.user_name as sellerName
-        from `xiafish`.`order` o
-        left join user buyer on o.buyer_id = buyer.user_id
-        left join user seller on o.seller_id = seller.user_id
+        from xiafish.`order` o
+        left join xiafish.user buyer on o.buyer_id = buyer.user_id
+        left join xiafish.user seller on o.seller_id = seller.user_id
         <where>
             <if test="buyerId != null">buyer_id = #{buyerId}</if>
             <if test="sellerId != null">and seller_id = #{sellerId}</if>

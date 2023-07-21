@@ -25,6 +25,6 @@ public interface AdminService {
 
     void updateUser(User user);
 
-    List<ReturnOrder> getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end);
+    PageBean getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end);
 
 }

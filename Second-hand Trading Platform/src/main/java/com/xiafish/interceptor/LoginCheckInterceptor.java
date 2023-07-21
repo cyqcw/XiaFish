@@ -3,6 +3,7 @@ package com.xiafish.interceptor;
 import com.alibaba.fastjson.JSONObject;
 import com.xiafish.pojo.Result;
 import com.xiafish.util.JwtUtils;
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -58,8 +59,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         Integer userId;
         try {
             userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (JwtException e){
+            //e.printStackTrace();
             log.info("令牌解析失败");
             Result error=Result.error("NOT_LOGIN");
             String notLogin=JSONObject.toJSONString(error);

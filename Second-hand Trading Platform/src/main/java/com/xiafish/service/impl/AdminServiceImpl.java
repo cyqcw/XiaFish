@@ -49,17 +49,25 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<ReturnOrder> getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end) {
+    public PageBean getOrder(Integer page, Integer pageSize, String buyerName, String sellerName, LocalDateTime begin, LocalDateTime end) {
+
+        // 获取用户ID
+        Integer buyerId = adminMapper.getUserIdByUserName(buyerName);
+        Integer sellerId = adminMapper.getUserIdByUserName(sellerName);
 
         // 设置分页参数
         PageHelper.startPage(page,pageSize);
-        Integer buyerId = adminMapper.getUserIdByUserName(buyerName);
-        Integer sellerId =adminMapper.getUserIdByUserName(sellerName);
-        //执行条件分页查询
-        List<ReturnOrder> orderList=adminMapper.getOrder(buyerId,sellerId,begin,end);
-//        //获取查询结果
-//        Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
-        //返回查询结果
-        return orderList;
+
+        // 执行条件分页查询
+        List<ReturnOrder> orderList = adminMapper.getOrder(buyerId,sellerId,begin,end);
+
+        // PageHelper返回的orderList实际上是Page类型
+        Page<ReturnOrder> p = (Page<ReturnOrder>) orderList;
+
+        // 封装PageBean
+        PageBean pageBean = new PageBean(p.getTotal(), p.getResult());
+
+        // 返回查询结果
+        return pageBean;
     }
 }
