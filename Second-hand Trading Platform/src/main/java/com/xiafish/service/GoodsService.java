@@ -1,6 +1,7 @@
 package com.xiafish.service;
 
 import com.xiafish.pojo.Goods;
+import com.xiafish.pojo.GoodsComment;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ public interface GoodsService {
 
     void purchaseById(Integer userId, Integer goodsId, Integer orderNum);
 
+    void releaseComment(GoodsComment goodsComment);
+
+
     void uploadImgs(Integer goodsId, List<String> urls);
+
 }

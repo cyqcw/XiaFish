@@ -76,4 +76,9 @@ public class UserServiceImpl implements UserService {
         userMapper.updateHeadImg(userId,url);
     }
 
+    @Override
+    public void updateUserGoods(Goods goods) {
+        userMapper.updateGoods(goods);
+    }
+
 }

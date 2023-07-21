@@ -21,4 +21,7 @@ public interface UserService {
 
     List<Order> findOrder(Integer userid);
     void updateHeadImg(Integer userId, String url);
+
+    void updateUserGoods(Goods goods);
+
 }

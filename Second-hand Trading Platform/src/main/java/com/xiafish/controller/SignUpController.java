@@ -4,6 +4,7 @@ import com.xiafish.pojo.Result;
 import com.xiafish.service.SignUpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,16 +23,13 @@ public class SignUpController {
     {
         String username=(String) loginBody.get("username");
         String password=(String) loginBody.get("password");
-        try
-        {
-            signUpService.addUser(username,password);
-            return Result.success();
-        }
-        catch (RuntimeException e)
-        {
-            log.info(e.getMessage());
-            return Result.error("the username has existed");
-        }
+        // 使用BCryptPasswordEncoder进行密码加密
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encryptedPassword = encoder.encode(password);
+
+        signUpService.addUser(username,encryptedPassword);
+        return Result.success();
+
 
     }
 }

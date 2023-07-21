@@ -20,5 +20,5 @@ public class Order {
     private Integer orderNum;
     private Float orderSumPrice;
     private String orderStatus;
-    private LocalDate orderDateTime;
+    private LocalDateTime orderDateTime;
 }

@@ -82,4 +82,10 @@ public class UserController {
         List<ShoppingCart> shoppingCarts=userService.viewShoppingCart(userId);
         return Result.success(shoppingCarts);
     }
+    @PatchMapping("user/goods/update")
+    public Result updateUserGoods(@RequestBody Goods goods)
+    {
+        userService.updateUserGoods(goods);
+        return Result.success();
+    }
 }

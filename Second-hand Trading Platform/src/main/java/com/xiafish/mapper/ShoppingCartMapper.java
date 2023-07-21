@@ -1,9 +1,7 @@
 package com.xiafish.mapper;
 
 import com.xiafish.pojo.ShoppingCart;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,4 +17,13 @@ public interface ShoppingCartMapper {
             "where user_id = #{userId} ")
     List<ShoppingCart> getShoppingCartsList(Integer userId);
 
+    @Update("update xiafish.shopping_cart set collect_num=#{collectNum} where shopping_cart_id=#{shoppingCartId}")
+    void updateShoppingCart(ShoppingCart shoppingCart);
+    @Select("select xiafish.shopping_cart.* " +
+            "from xiafish.shopping_cart " +
+            "where shopping_cart_id = #{shoppingCartId} ")
+    ShoppingCart getShoppingCartById(Integer shoppingCartId);
+
+    @Delete("delete from xiafish.shopping_cart where shopping_cart_id=#{shoppingCartId}")
+    void deleteShoppingCart(ShoppingCart shoppingCart);
 }
