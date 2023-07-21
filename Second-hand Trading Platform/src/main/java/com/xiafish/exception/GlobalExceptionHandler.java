@@ -4,6 +4,7 @@ import java.net.ConnectException;
 import com.xiafish.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.exceptions.PersistenceException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,7 +33,21 @@ public class GlobalExceptionHandler {
         if(cause instanceof ConnectException) {
             return handleConnectException(cause);
         }
+        if(cause instanceof BadCredentialsException) {
+            return handleBadCredentialsException(cause);
+        }
         return Result.error("对不起操作失败，请联系管理员");
+    }
+
+    private Result handleBadCredentialsException(Throwable cause) {
+        String message;
+        message=cause.getMessage();
+        log.info("异常：{}", message);
+        if(message.contains("Incorrect password"))
+        {
+            return Result.error("用户名或密码错误");
+        }
+        return Result.error(cause.getMessage());
     }
 
 

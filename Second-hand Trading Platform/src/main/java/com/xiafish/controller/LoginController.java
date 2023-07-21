@@ -7,6 +7,7 @@ import com.xiafish.service.UserService;
 import com.xiafish.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +29,7 @@ public class LoginController implements HandlerInterceptor {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public Result login(@RequestBody Map<String, Object> loginBody)
+    public Result login(@RequestBody Map<String, Object> loginBody)throws BadCredentialsException
     {
         String username=(String) loginBody.get("username");
         String password=(String) loginBody.get("password");
@@ -39,18 +40,11 @@ public class LoginController implements HandlerInterceptor {
         Map<String, Object> claims = new HashMap<>();
         Integer userId;
         String userPasswd;
-        try {
 
-            Map<String,Object>  userIdAndPasswd= loginService.getIdByUserName(username);
-            userId=(Integer) userIdAndPasswd.get("user_id");
-            userPasswd = (String) userIdAndPasswd.get("user_passwd");
-            if(!encoder.matches(password,userPasswd))throw new RuntimeException("Incorrect password");
-          
-        }catch (RuntimeException e)
-        {
-            log.info(e.getMessage());
-            return Result.error("Incorrect username or password");
-        }
+        Map<String,Object>  userIdAndPasswd= loginService.getIdByUserName(username);
+        userId=(Integer) userIdAndPasswd.get("user_id");
+        userPasswd = (String) userIdAndPasswd.get("user_passwd");
+        if(!encoder.matches(password,userPasswd))throw new BadCredentialsException("Incorrect password");
 
         userStatus=loginService.getStatusByUserId(userId);
 
