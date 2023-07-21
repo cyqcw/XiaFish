@@ -10,14 +10,8 @@ public class SignUpServiceImpl implements SignUpService {
     @Autowired
     private SignUpMapper signUpMapper;
     @Override
-    public void addUser(String username, String password) throws RuntimeException{
-        try {
+    public void addUser(String username, String password){
             signUpMapper.addUser(username, password);
-        }catch (RuntimeException e)
-        {
-            //e.printStackTrace();
-            throw new RuntimeException("用户名已存在");
-        }
-
     }
+
 }

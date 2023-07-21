@@ -27,16 +27,9 @@ public class SignUpController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encryptedPassword = encoder.encode(password);
 
-        try
-        {
-            signUpService.addUser(username,encryptedPassword);
-            return Result.success();
-        }
-        catch (RuntimeException e)
-        {
-            log.info(e.getMessage());
-            return Result.error("the username has existed");
-        }
+        signUpService.addUser(username,encryptedPassword);
+        return Result.success();
+
 
     }
 }

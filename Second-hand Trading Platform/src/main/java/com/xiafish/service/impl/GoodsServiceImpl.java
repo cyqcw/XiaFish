@@ -35,9 +35,9 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-
     public void releaseComment(GoodsComment goodsComment) {
         goodsMapper.addComment(goodsComment);
+    }
 
     public void uploadImgs(Integer goodsId, List<String> urls) {
         goodsMapper.insertImages(goodsId,urls);
