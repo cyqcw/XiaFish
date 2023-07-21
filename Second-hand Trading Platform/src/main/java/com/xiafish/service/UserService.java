@@ -9,10 +9,6 @@ public interface UserService {
 
     void updateUser(User user);
 
-
-
-
-
     List<Goods> getGoodsByUserId(Integer userId);
 
     void releaseGoods(Goods goods);
