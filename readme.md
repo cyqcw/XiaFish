@@ -1,7 +1,9 @@
 # 厦小鱼二手交易平台
 
-## 需求说明
 
-![image-20230715000421843](C:\Users\26401\AppData\Roaming\Typora\typora-user-images\image-20230715000421843.png)
 
-![image-20230715000448997](C:\Users\26401\AppData\Roaming\Typora\typora-user-images\image-20230715000448997.png)
+最新的SQL已经上传
+
+接口文档里的数据参数麻烦按照实体类中的属性修改
+
+目前接口实现了3、4,  2.1,  2.2,6.1 但是没有实现搜索功能，只能根据id来查询，登录功能框架已经实现，但是为了方便测试会对全部请求进行放行

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiafish.mapper.ShoppingCartMapper">
+    <select id="com.xiafish.mapper.ShoppingCartMapper.getCartListByUserId" resultType="com.xiafish.pojo.ShoppingCart">
+        SELECT *
+        FROM
+            xiafish.shopping_cart
+                JOIN
+            xiafish.goods ON shopping_cart.goods_id = goods.goods_id
+                LEFT JOIN
+            xiafish.goods_category ON goods_category.category_id=goods.goods_category_id
+        WHERE
+            user_id = #{userId};
+    </select>
+</mapper>

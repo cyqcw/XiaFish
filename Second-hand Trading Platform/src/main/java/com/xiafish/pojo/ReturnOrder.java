@@ -1,10 +1,8 @@
 package com.xiafish.pojo;
 
-import ch.qos.logback.classic.pattern.LineOfCallerConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.core.SpringVersion;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,13 +10,15 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class ReturnOrder {
     private Integer orderId;
     private Integer buyerId;
     private Integer sellerId;
     private Integer goodsId;
     private Integer orderNum;
-    private Float orderSumPrice;
+    private float orderSumPrice;
     private String orderStatus;
     private LocalDateTime orderDateTime;
+    private String buyerName;
+    private String sellerName;
 }

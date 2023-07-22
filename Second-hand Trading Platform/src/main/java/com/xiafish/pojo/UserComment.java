@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Car {
-    private Integer uid;
+public class UserComment {
+    private Integer userCommentId;
+    private Integer buyerId;
+    private Integer sellerId;
+    private String userCommentContent;
 }
