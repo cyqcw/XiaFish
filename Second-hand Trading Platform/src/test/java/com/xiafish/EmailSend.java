@@ -13,7 +13,7 @@ public class EmailSend {
     @Test
     public void sendTemplateMail() {
         //发送邮件
-        emailSendUtils.sendMessageToEmail("114514","2640115971@qq.com");
+        emailSendUtils.sendMessageToEmail("114514","2436579671@qq.com");
     }
 
 }

@@ -56,9 +56,10 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
 
         //5.解析token
-        Integer userId;
+        Integer userId,userStatus;
         try {
             userId = JwtUtils.parseJwt(jwt).get("id", Integer.class);
+            userStatus = JwtUtils.parseJwt(jwt).get("status", Integer.class);
         }catch (JwtException e){
             //e.printStackTrace();
             log.info("令牌解析失败");
@@ -70,6 +71,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             return false;
         }
         request.setAttribute("userId", userId);
+        request.setAttribute("userStatus", userStatus);
         //6.放行
         return true;
     }

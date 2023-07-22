@@ -1,4 +1,6 @@
 package com.xiafish.config;
+
+import com.xiafish.interceptor.AdminCheckInterceptor;
 import com.xiafish.interceptor.LoginCheckInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -23,9 +25,12 @@ public class WebConfig implements WebMvcConfigurer {
     //该函数用于配置拦截器，对所有的请求路径进行拦截
     @Autowired
     private LoginCheckInterceptor loginCheckInterceptor;
+    @Autowired
+    private AdminCheckInterceptor adminCheckInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").order(1);
+        registry.addInterceptor(adminCheckInterceptor).addPathPatterns("/admin/**").order(2);
     }
 
 

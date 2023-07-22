@@ -27,7 +27,7 @@ class JwtTest {
 
 	@Test
 	public void testParseJwt(){
-		String jwt="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjg5ODQyODc2LCJzdGF0dXMiOjF9.MvoFa93iOa3MUMmR_cgsECHOTTKX-Tnjqr0LI6Ot8Sw";
+		String jwt="eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZXhwIjoxNjg5ODQ4ODMzLCJzdGF0dXMiOjF9.C5cXSgR8l7W5SPqX6p2QjJIMUgrqejgxXddn86Yf5Vc";
 		Claims claims=Jwts.parser()
 				.setSigningKey("XiaXiaoYu")
 				.parseClaimsJws(jwt).getBody();
